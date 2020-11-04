@@ -12,7 +12,7 @@ def main():
 def pic_generator(yields_num: int, max_balls: int, min_diam: int, max_diam: int, bg_width: int, bg_height: int):
     """
     :param yields_num: number of yields
-    :yield: get_random_pic(max_balls, min_diam, max_diam, bg_width, bg_height)  
+    :yield: random picture of background with some balls (further description in get_random_pic)  
     """
     for i in range(yields_num):
         yield get_random_pic(max_balls, min_diam, max_diam, bg_width, bg_height)
@@ -38,7 +38,7 @@ def get_random_pic(max_balls: int, min_diam: int, max_diam: int, bg_width: int, 
         ball_image = Image.open("Demo-BallSet" + os.sep + ball_file)
         bg_arr = circle_copy_stupid(np.array(ball_image.resize((ball_list[i][2], ball_list[i][2]))), bg_arr, ball_list[i][0], ball_list[i][1], ball_list[i][2])
         ball_list[i] = (ball_list[i][0] + ball_list[i][2] / 2.0 - 0.5, ball_list[i][1] + ball_list[i][2] / 2.0 - 0.5, ball_list[i][2] / 2.0) #turn from top left coordinates and diameter to center coordinates and radius
-    ball_list.sort(key = lambda item: item[0] + item[1]) #sort by function: x coordinate + y coordinate 
+    ball_list.sort(key=lambda item: item[0] + item[1]) #sort by function: x coordinate + y coordinate 
     return (bg_arr, np.array(ball_list))
 
 def randomize_balls(max_balls: int, min_diam: int, max_diam: int, bg_width: int, bg_height: int):
