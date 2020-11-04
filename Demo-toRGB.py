@@ -3,6 +3,10 @@ import numpy as np
 from PIL import Image
 
 def main():
+    """
+    This function turns all Ball picture and BG pictures to RGB (24 bit per pixel).
+    If the files are already RGB, the functions does nothing.
+    """
     ball_files, bg_files = os.listdir("Demo-BallSet"), os.listdir("Demo-BGSet")
     for ball in (ball_files):
         rgb_ball_image = Image.open("Demo-BallSet" + os.sep + ball).convert('RGB')
@@ -12,6 +16,6 @@ def main():
         rgb_bg_image = Image.open("Demo-BGSet" + os.sep + bg).convert('RGB')
         np_bg = np.array(rgb_bg_image)
         Image.fromarray(np_bg).save("Demo-BGSet" + os.sep + bg)
-
+        
 if __name__ == "__main__":
     main()
