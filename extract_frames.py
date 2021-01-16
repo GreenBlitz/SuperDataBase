@@ -50,6 +50,7 @@ def extractFramesTen(pathIn, pathOut):
     prevFrame = 0
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     print(frame_count)
+    #captures all the frames and pushes them to laplist
     while (cap.isOpened()):
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -61,14 +62,18 @@ def extractFramesTen(pathIn, pathOut):
             count += 1
         else:
             break
+    #optional, calc avg of laplacian and uses frames higher from the avg value
     for i in laplist:
         lapsum += i[1]
     lapavg = lapsum/frame_count
+    #goes through the laplist and write the 10% frames into memory
     for i in laplist:
         perfectcount = 0
+        #if the frame is better then the frames in this loop it adds 1 to count
         for j in laplist:
             if(i[1]>j[1]):
                 perfectcount += 1
+        #checking if the frame is better then 90% of the frames in the video
         if(perfectcount/frame_count>=0.9 and (i[0] - prevFrame)> 5):          
             print(i[1])
             print('Read %d frame: ' % i[0], i[3])
