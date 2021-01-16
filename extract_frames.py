@@ -32,15 +32,21 @@ def extractFrames(pathIn, pathOut):
 
 def extractFramesTen(pathIn, pathOut):
     fileName = pathIn [:-4]
+    #opening the video
     cap = cv2.VideoCapture(pathIn)
+    #frame counter
     count = 0
+    #list that saves tupples with 4 attributes (count, laplacian val of the frame, frame, and boolean)
     laplist = []
     framelist = []
     countlist = []
     perfectlist = []
+    #counts the best pictures if the laplacian value is higher then other frame
     perfectcount = 0
+    #counts the total laplacian ##optional
     lapsum = 0
     check = 0
+    #check the gap beetween the frame and see if the previous frame didn't get captured
     prevFrame = 0
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     print(frame_count)
